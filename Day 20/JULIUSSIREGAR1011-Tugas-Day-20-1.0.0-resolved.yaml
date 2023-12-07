@@ -1,0 +1,344 @@
+---
+openapi: 3.0.0
+info:
+  title: Tugas Day 20 - Julius Siregar
+  description: Julius Siregar Tugas Day 20 Alterra BE-19
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: juliussiregar1011@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/JULIUSSIREGAR1011/Tugas-Day-20/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: users
+  description: User operations
+paths:
+  /users:
+    get:
+      summary: Get all users
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              example:
+              - Id: 1
+                Name: John Doe
+                Email: john.doe@example.com
+                Password: password123
+              - Id: 2
+                Name: Jane Doe
+                Email: jane.doe@example.com
+                Password: password456
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              example:
+              - Id: 1
+                Name: Julius Siregar
+                Email: julius@gmail.com
+                Password: "12345"
+              - Id: 2
+                Name: Jul aja
+                Email: julaja@gmail.com
+                Password: "456789"
+    put:
+      summary: Update an existing user
+      operationId: updateUser
+      requestBody:
+        description: Updated user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              Id: 1
+              Name: Julius Siregar
+              Email: julius@gmail.com
+              Password: "12345"
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              Id: 1
+              Name: Julius Siregar
+              Email: julius@gmail.com
+              Password: "12345"
+        required: true
+      responses:
+        "200":
+          description: Update successful
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: User updated successfully
+            application/xml:
+              schema:
+                type: object
+              example:
+                message: User updated successfully
+        "400":
+          description: Invalid ID supplied or validation exception
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: Invalid ID supplied or validation exception
+            application/xml:
+              schema:
+                type: object
+              example:
+                error: Invalid ID supplied or validation exception
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: User not found
+            application/xml:
+              schema:
+                type: object
+              example:
+                error: User not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: Internal server error
+            application/xml:
+              schema:
+                type: object
+              example:
+                error: Internal server error
+      security:
+      - api_key: []
+    post:
+      summary: Add a new user
+      operationId: addUser
+      requestBody:
+        description: User object that needs to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              Id: 1
+              Name: Julius Siregar
+              Email: julius@gmail.com
+              Password: "12345"
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              Id: 1
+              Name: Julius Siregar
+              Email: julius@gmail.com
+              Password: "12345"
+        required: true
+      responses:
+        "201":
+          description: User added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: User added successfully
+            application/xml:
+              schema:
+                type: object
+              example:
+                message: User added successfully
+        "400":
+          description: Invalid input or validation exception
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: Invalid input or validation exception
+            application/xml:
+              schema:
+                type: object
+              example:
+                error: Invalid input or validation exception
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: Internal server error
+            application/xml:
+              schema:
+                type: object
+              example:
+                error: Internal server error
+      security:
+      - api_key: []
+  /users/{userId}:
+    get:
+      summary: Find user by ID
+      description: Returns a user by ID
+      operationId: getUserById
+      parameters:
+      - name: userId
+        in: path
+        description: ID of user to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              example:
+                Id: 1
+                Name: Julius Siregar
+                Email: julius@gmail.com
+                Password: "12345"
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+              example:
+                Id: 1
+                Name: Julius Siregar
+                Email: julius@gmail.com
+                Password: "12345"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: User not found
+            application/xml:
+              schema:
+                type: object
+              example:
+                error: User not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: Internal server error
+            application/xml:
+              schema:
+                type: object
+              example:
+                error: Internal server error
+    delete:
+      summary: Deletes a user
+      operationId: deleteUser
+      parameters:
+      - name: userId
+        in: path
+        description: User ID to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int
+      responses:
+        "200":
+          description: Deletion successful
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: User deleted successfully
+            application/xml:
+              schema:
+                type: object
+              example:
+                message: User deleted successfully
+        "400":
+          description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: Invalid ID supplied
+            application/xml:
+              schema:
+                type: object
+              example:
+                error: Invalid ID supplied
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: User not found
+            application/xml:
+              schema:
+                type: object
+              example:
+                error: User not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: Internal server error
+            application/xml:
+              schema:
+                type: object
+              example:
+                error: Internal server error
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int
+        Name:
+          type: string
+        Email:
+          type: string
+        Password:
+          type: string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
